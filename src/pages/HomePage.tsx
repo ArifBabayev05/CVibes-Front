@@ -59,6 +59,7 @@ export const HomePage: React.FC = () => {
       try {
         const response = await fetch('https://cvibes-api.netlify.app/api/analyze-cvs', {
           method: 'POST',
+          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ documents }),
         });
