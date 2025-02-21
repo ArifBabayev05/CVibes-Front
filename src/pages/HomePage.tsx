@@ -57,7 +57,7 @@ export const HomePage: React.FC = () => {
   const analyzeCVsMutation = useMutation({
     mutationFn: async (documents: CVDocument[]) => {
       try {
-        const response = await fetch('http://localhost:3001/api/analyze-cvs', {
+        const response = await fetch('https://cvibes-api.netlify.app/api/analyze-cvs', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ documents }),
