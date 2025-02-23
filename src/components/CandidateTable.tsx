@@ -24,7 +24,7 @@ export const CandidateTable: React.FC<CandidateTableProps> = ({ candidates, onCa
   const filteredCandidates = candidates.filter(candidate =>
     candidate.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     candidate.ContactInformation.Email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (candidate.Skills?.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase())) || false)
+    (Array.isArray(candidate.Skills) && candidate.Skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase())))
   );
 
   const sortedCandidates = [...filteredCandidates].sort((a, b) => {
@@ -107,7 +107,7 @@ export const CandidateTable: React.FC<CandidateTableProps> = ({ candidates, onCa
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex flex-wrap gap-1">
-                    {(candidate.Skills?.slice(0, 3) || []).map((skill, skillIndex) => (
+                    {(Array.isArray(candidate.Skills) ? candidate.Skills.slice(0, 3) : []).map((skill, skillIndex) => (
                       <span
                         key={skillIndex}
                         className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
@@ -115,7 +115,7 @@ export const CandidateTable: React.FC<CandidateTableProps> = ({ candidates, onCa
                         {skill}
                       </span>
                     ))}
-                    {candidate.Skills?.length > 3 && (
+                    {Array.isArray(candidate.Skills) && candidate.Skills.length > 3 && (
                       <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                         +{candidate.Skills.length - 3}
                       </span>
@@ -139,7 +139,7 @@ export const CandidateTable: React.FC<CandidateTableProps> = ({ candidates, onCa
                     ${candidate.status === 'error' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' : ''}
                     ${candidate.status === 'pending' ? 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200' : ''}
                   `}>
-                    {candidate.status.charAt(0).toUpperCase() + candidate.status?.slice(1)}
+                    {candidate.status.charAt(0).toUpperCase() + candidate.status.slice(1)}
                   </span>
                 </td>
               </tr>
