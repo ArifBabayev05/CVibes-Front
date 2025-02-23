@@ -57,7 +57,7 @@ export const HomePage: React.FC = () => {
   const analyzeCVsMutation = useMutation({
     mutationFn: async (documents: CVDocument[]) => {
       try {
-        const response = await fetch('https://cvibes-api.netlify.app/api/analyze-cvs', {
+        const response = await fetch('https://cvibes.onrender.com/api/analyze-cvs', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ documents }),
@@ -119,6 +119,7 @@ export const HomePage: React.FC = () => {
         files.map(async (file) => ({
           base64: await convertFileToBase64(file),
           fileType: file.name.split('.').pop()?.toLowerCase() || '',
+          
         }))
       );
 
