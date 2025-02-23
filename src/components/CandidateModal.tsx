@@ -44,7 +44,7 @@ export const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, onClo
           <section>
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">Skills</h3>
             <div className="flex flex-wrap gap-2">
-              {candidate.Skills.map((skill, index) => (
+              {candidate.Skills?.map((skill, index) => (
                 <span
                   key={index}
                   className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
